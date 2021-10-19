@@ -19,12 +19,13 @@
       <nav>
         <ul>
           <li><a href="#tokens">Tokens</a></li>
+          <li><a href="#grammar">Grammar</a></li>
         </ul>
       </nav>
 
       <h2 id="tokens">Tokens</h2>
 
-      <p>The following are <strong>reserved words</strong> in the language: <code>change</code> <code>clear</code> <code>concat</code> <code>convert</code> <code>define</code> <code>false</code> <code>for</code> <code>if</code> <code>length</code> <code>let</code> <code>print</code> <code>return</code> <code>sleep</code> <code>slice</code> <code>true</code>.</p>
+      <p>The following are <strong>reserved words</strong> in the language: <code>change</code> <code>clear</code> <code>concat</code> <code>convert</code> <code>define</code> <code>false</code> <code>for</code> <code>if</code> <code>length</code> <code>let</code> <code>print</code> <code>return</code> <code>set</code> <code>sleep</code> <code>slice</code> <code>true</code>.</p>
 
       <p>Any maximal sequences of ASCII letters (uppercase or lowercase) that are not reserved words are classified as <strong>identifiers</strong>.</p>
 
@@ -41,6 +42,33 @@
       <p>Whitespace is allowed (and ignored) between tokens, but never allowed within them. The recognized whitespace characters are space (0x20), line feed (0x0A), carriage return (0x0D), and horizontal tab (0x09). Other forms of (ASCII or Unicode) whitespace are not allowed between tokens.</p>
 
       <p>Any non-whitespace sequence of characters which doesn't match any of the above token categories is <strong>disallowed</strong>, and causes a tokenization error to be issued; in this case, the program is not processed further.</p>
+
+      <h2 id="grammar">Grammar</h2>
+
+      <p>The following grammar describes which token sequences correspond to Crude programs. Expressions will be described separately.</p>
+
+      <pre><code>Program ::= Statement*
+
+Statement ::= LetDeclaration | IfStatement | ReturnStatement | ForStatement
+            | FunctionDeclaration | SetStatement | ExpressionStatement
+
+LetDeclaration ::= "let" identifier "=" Expression ";"
+
+IfStatement ::= "if" "(" Expression ")" Block
+
+Block ::= "{" Statement* "}"
+
+ReturnStatement ::= "return" Expression ";"
+
+ForStatement ::= "for" "(" identifier "," Expression "," Exprsssion ")" Block
+
+FunctionDeclaration ::= "define" identifier ParameterList Block
+
+ParameterList ::= "(" identifier ("," identifier)* ")"
+
+SetStatement ::= "set" identifier "=" Expression
+
+ExpressionStatement ::= Expression</code></pre>
     </div>
   </body>
 </html>
