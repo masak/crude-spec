@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Crude v2 specification</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="bootstrap-5.1.1.min.css" rel="stylesheet" type="text/css" />
+    <style>
+      body { padding-top: 2ex; }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Crude v2 specification</h1>
+      <em>Version 2021-10-19</em>
+
+      <p><strong>Crude</strong> was designed and implemented by [bergsans](https://github.com/bergsans). It is an interpreted imperative language in the style of JavaScript.</p>
+
+      <nav>
+        <ul>
+          <li><a href="#tokenization">Tokenization</a></li>
+        </ul>
+      </nav>
+
+      <h2 id="tokenization">Tokenization</h2>
+
+      <p>The following are <strong>reserved words</strong> in the language: <code>change</code> <code>concat</code> <code>convert</code> <code>define</code> <code>false</code> <code>for</code> <code>if</code> <code>length</code> <code>let</code> <code>print</code> <code>return</code> <code>slice</code> <code>true</code>.</p>
+
+      <p>Any maximal sequences of ASCII letters (uppercase or lowercase) that are not reserved words are classified as <strong>identifiers</strong>.</p>
+
+      <p>The following <strong>operators</strong> are recognized: <code>+</code> <code>-</code> <code>*</code> <code>/</code> <code>%</code> <code>^</code> <code>=</code> <code>==</code> <code>!=</code> <code>&lt;</code> <code>&lt;=</code> <code>&gt;</code> <code>&gt;=</code> <code>!</code> <code>&amp;</code> <code>&amp;&amp;</code> <code>|</code> <code>||</code>.</p>
+
+      <p>The following <strong>delimiters</strong> are recognized: <code>(</code> <code>)</code> <code>[</code> <code>]</code> <code>{</code> <code>}</code>.</p>
+
+      <p>The following <strong>separators</strong> are recognized: <code>,</code> <code>;</code>.</p>
+
+      <p><strong>Integers</strong> are any sequence of one or more digits.</p>
+
+      <p><strong>Strings</strong> are enclosed in double quotes (<code>"</code>); within them, any Unicode character may appear except for a double quote. The backslash character (<code>\</code>) is not treated specially (in particular, it doesn't impose a different interpretation of the next character); it only represents itself literally.</p>
+
+      <p>Whitespace is allowed (and ignored) between tokens, but never allowed within them. The recognized whitespace characters are space (0x20), line feed (0x0A), carriage return (0x0D), and horizontal tab (0x09). Other forms of (ASCII or Unicode) whitespace are not allowed between tokens.</p>
+    </div>
+  </body>
+</html>
+
