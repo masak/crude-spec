@@ -49,26 +49,28 @@
 
       <p>The following grammar describes which token sequences correspond to Crude programs. Expressions will be described separately.</p>
 
+      <p>CamelCase words denote productions; all-lowercase words denote either reserved words or token classes; all symbolic tokens are quoted.</p>
+
       <pre><code>Program ::= Statement*
 
 Statement ::= LetDeclaration | IfStatement | ReturnStatement | ForStatement
             | FunctionDeclaration | SetStatement | ExpressionStatement
 
-LetDeclaration ::= "let" identifier "=" Expression ";"
+LetDeclaration ::= let identifier "=" Expression ";"
 
-IfStatement ::= "if" "(" Expression ")" Block
+IfStatement ::= if "(" Expression ")" Block
 
 Block ::= "{" Statement* "}"
 
-ReturnStatement ::= "return" Expression ";"
+ReturnStatement ::= return Expression ";"
 
-ForStatement ::= "for" "(" identifier "," Expression "," Exprsssion ")" Block
+ForStatement ::= for "(" identifier "," Expression "," Exprsssion ")" Block
 
-FunctionDeclaration ::= "define" identifier ParameterList Block
+FunctionDeclaration ::= define identifier ParameterList Block
 
 ParameterList ::= "(" identifier ("," identifier)* ")"
 
-SetStatement ::= "set" identifier "=" Expression
+SetStatement ::= set identifier "=" Expression
 
 ExpressionStatement ::= Expression</code></pre>
     </div>
