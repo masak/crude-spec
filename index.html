@@ -14,7 +14,7 @@
   <body>
     <div class="container">
       <h1>Crude v2 specification</h1>
-      <em>Version 2021-10-20</em>
+      <h2 class="text-muted">Version 2021-10-20</h2>
 
       <p><strong>Crude</strong> was designed and implemented by [bergsans](https://github.com/bergsans) as a vehicle for learning about parsers and interpreters. It is an interpreted imperative language in the style of JavaScript.</p>
 
@@ -61,7 +61,12 @@
 
       <h3 id="if-statement"><code>if</code> statement</h3>
 
-      <p><code>if</code> <code>(</code> <var>Expression</var> <code>)</code> <var>Block</var></p>
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Grammar</h5>
+          <p><code>if</code> <code>(</code> <var>Expression</var> <code>)</code> <var>Block</var></p>
+        </div>
+      </div>
 
       <p>(<var>Expression</var> and <var>Block</var> are defined below.)</p>
 
@@ -69,7 +74,12 @@
 
       <h3 id="for-statement"><code>for</code> statement</h3>
 
-      <p><code>for</code> <code>(</code> <var>Identifier</var> <code>,</code> <var>LowerBound</var> <code>,</code> <var>UpperBound</var> <code>)</code> <var>Block</var></p>
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Grammar</h5>
+          <p><code>for</code> <code>(</code> <var>Identifier</var> <code>,</code> <var>LowerBound</var> <code>,</code> <var>UpperBound</var> <code>)</code> <var>Block</var></p>
+        </div>
+      </div>
 
       <p><var>LowerBound</var> and <var>UpperBound</var> are both <var>Expression</var>s.</p>
 
