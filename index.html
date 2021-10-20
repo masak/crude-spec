@@ -86,10 +86,10 @@
       <p>At runtime, a <code>for</code> statement first creates a child environment and binds <var>Identifier</var> to <var>LowerBound</var>. Then it executes the following loop:</p>
 
       <ul>
-        <li>For as long as <var>Identifier</var> <code>&lt;=</code> <var>UpperBound</var>:
+        <li>For as long as the value looked up in <var>Identifier</var> (in the child environment) doesn't exceed <var>UpperBound</var>:
           <ul>
             <li>Execute <var>Block</var> in the child environment.</li>
-            <li>Re-bind <var>Identifier</var> to <var>Identifier</var> <code>+</code> 1 in the child environment.</li>
+            <li>Re-bind <var>Identifier</var> to <var>Identifier</var> + 1 in the child environment.</li>
           </ul>
         </li>
       </ul>
