@@ -53,26 +53,19 @@
 
       <pre><code>Program ::= Statement*
 
-Statement ::= LetDeclaration | IfStatement | ReturnStatement | ForStatement
-            | FunctionDeclaration | SetStatement | ExpressionStatement
-
-LetDeclaration ::= let identifier "=" Expression ";"
+Statement ::= IfStatement | ForStatement | LetDeclaration | SetStatement
+            | FunctionDeclaration | ReturnStatement | ExpressionStatement
 
 IfStatement ::= if "(" Expression ")" Block
+ForStatement ::= for "(" identifier "," Expression "," Exprsssion ")" Block
+LetDeclaration ::= let identifier "=" Expression ";"
+SetStatement ::= set identifier "=" Expression
+FunctionDeclaration ::= define identifier ParameterList Block
+ReturnStatement ::= return Expression ";"
+ExpressionStatement ::= Expression
 
 Block ::= "{" Statement* "}"
-
-ReturnStatement ::= return Expression ";"
-
-ForStatement ::= for "(" identifier "," Expression "," Exprsssion ")" Block
-
-FunctionDeclaration ::= define identifier ParameterList Block
-
-ParameterList ::= "(" identifier ("," identifier)* ")"
-
-SetStatement ::= set identifier "=" Expression
-
-ExpressionStatement ::= Expression</code></pre>
+ParameterList ::= "(" identifier ("," identifier)* ")"</code></pre>
     </div>
   </body>
 </html>
