@@ -21,7 +21,7 @@
       <nav>
         <ul>
           <li><a href="#tokens">Tokens</a></li>
-          <li><a href="#grammar">Grammar</a></li>
+          <li><a href="#structure">Program structure</a></li>
         </ul>
       </nav>
 
@@ -35,7 +35,7 @@
 
       <p>The following <strong>delimiters</strong> are recognized: <code>(</code> <code>)</code> <code>[</code> <code>]</code> <code>{</code> <code>}</code>.</p>
 
-      <p>The following <strong>separators</strong> are recognized: <code>,</code> <code>;</code>.</p>
+      <p>The following <strong>separators</strong> are recognized: <code>,</code> <code>;</code> and <strong>the end-of-file token</strong>.</p>
 
       <p><strong>Integers</strong> are any sequence of one or more digits.</p>
 
@@ -45,20 +45,47 @@
 
       <p>Any non-whitespace sequence of characters which doesn't match any of the above token categories is <strong>disallowed</strong>, and causes a tokenization error to be issued; in this case, the program is not processed further.</p>
 
-      <h2 id="grammar">Grammar</h2>
+      <h2 id="structure">Program structure</h2>
 
-      <p>The following grammar describes which token sequences correspond to Crude programs. Expressions will be described separately.</p>
+      <p>A <strong>program</strong> is a sequence of zero or more statements. <strong>Statements</strong> come in seven kinds, described below.</p>
 
-      <p>CamelCase words denote productions; all-lowercase words denote either reserved words or token classes; all symbolic tokens are quoted.</p>
+      <h3 id="blocks-environments">Blocks and environments</h3>
 
-      <pre><code>Program ::= Statement*
+      <p>A <strong>block</strong> is not a kind of statement, but is used by some of the statement types. In a program, a block is a sequence of a <code>{</code> token, zero or more statements, and a <code>}</code> token.</p>
 
-Statement ::= IfStatement | ForStatement | LetDeclaration | SetStatement
-            | FunctionDeclaration | ReturnStatement | ExpressionStatement
+      <p>An <strong>environment</strong> is a data structure used by the runtime to store <strong>bindings</strong> of variables to values. Program execution starts in a dedicated environment called "the global environment" (specified below), but as different statements run, more environments are created. Unless otherwise stated, statements are executed in the current environment, which starts out being the global environment.</p>
 
-IfStatement ::= if "(" Expression ")" Block
-ForStatement ::= for "(" identifier "," Expression "," Exprsssion ")" Block
-LetDeclaration ::= let identifier "=" Expression ";"
+      <p>When <strong>lookup</strong> happens for a variable binding (in order to read or write it), first the current environment is searched, then its parent, and so on up to the global environment. If lookup fails to find a binding in any of the environments, a runtime error is signaled.</p>
+
+      <p>Whenever a block executes, it creates a child environment of the current environment, and evaluates its statement in this new environment, in order.</p>
+
+      <h3 id="if-statement"><code>if</code> statement</h3>
+
+      <p><code>if</code> <code>(</code> <var>Expression</var> <code>)</code> <var>Block</var></p>
+
+      <p>(<var>Expression</var> and <var>Block</var> are defined below.)</p>
+
+      <p>At runtime, an <code>if</code> statement first evaluates <var>Expression</var> and then, if the result is truthy, executes <var>Block</var>. The result of the <code>if</code> is the result of the last statement of <var>Block</var> if it executed, otherwise <em>undefined</em>.</p>
+
+      <h3 id="for-statement"><code>for</code> statement</h3>
+
+      <p><code>for</code> <code>(</code> <var>Identifier</var> <code>,</code> <var>LowerBound</var> <code>,</code> <var>UpperBound</var> <code>)</code> <var>Block</var></p>
+
+      <p><var>LowerBound</var> and <var>UpperBound</var> are both <var>Expression</var>s.</p>
+
+      <p>At runtime, a <code>for</code> statement first creates a child environment and binds <var>Identifier</var> to <var>LowerBound</var>. Then it executes the following loop:</p>
+
+      <ul>
+        <li>For as long as <var>Identifier</var> <code>&lt;=</code> <var>UpperBound</var>:</li>
+        <li>
+          <ul>
+            <li>Execute <var>Block</var> in the child environment.</li>
+            <li>Re-bind <var>Identifier</var> to <var>Identifier</var> <code>+</code> 1</li> in the child environment.
+          </ul>
+        </li>
+      </ul>
+
+      <pre><code>LetDeclaration ::= let identifier "=" Expression ";"
 SetStatement ::= set identifier "=" Expression
 FunctionDeclaration ::= define identifier ParameterList Block
 ReturnStatement ::= return Expression ";"
