@@ -97,14 +97,64 @@
         </li>
       </ul>
 
-      <pre><code>LetDeclaration ::= let identifier "=" Expression ";"
-SetStatement ::= set identifier "=" Expression
-FunctionDeclaration ::= define identifier ParameterList Block
-ReturnStatement ::= return Expression ";"
-ExpressionStatement ::= Expression
+      <p>The result of a <code>for</code> loop is <em>undefined</em>.</p>
 
-Block ::= "{" Statement* "}"
-ParameterList ::= "(" identifier ("," identifier)* ")"</code></pre>
+      <h3 id="let-statement"><code>let</code> statement</h3>
+
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Grammar</h5>
+          <p><code>let</code> <var>Identifier</var> <code>=</code> <var>Expression</var> <code>;</code></p>
+        </div>
+      </div>
+
+      <p>At runtime, a <code>let</code> statement evaluates <var>Expression</var>, then creates a child environment and binds <var>Identifier</var> to the result of the evaluation. The child environment with the new binding is used for executing the rest of the statements in the block. The result of a <code>let</code> statement is <em>undefined</em>.</p>
+
+      <h3 id="set-statement"><code>set</code> statement</h3>
+
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Grammar</h5>
+          <p><code>set</code> <var>Identifier</var> <code>=</code> <var>Expression</var> <code>;</code></p>
+        </div>
+      </div>
+
+      <p>At runtime, a <code>set</code> statement looks up <var>Identifier</var>; call the environment where it is found <var>E</var>. The statement then evaluates <var>Expression</var>, and then binds <var>Identifier</var> in <var>E</var> to the result. The result of a <code>set</code> statement is the result of the evaluation.</p>
+
+      <h3 id="define-statement"><code>define</code> statement</h3>
+
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Grammar</h5>
+          <p><code>define</code> <var>Identifier</var> <code>(</code> <var>Parameter</var> <code>,</code> <var>...</var> <code>)</code> <var>Block</var></p>
+        </div>
+      </div>
+
+      <p>There can be zero or more <var>Parameter</var>s; each <var>Parameter</var> is an <var>Identifier</var>.</p>
+
+      <p>At runtime, a <code>define</code> statement constructs a <strong>closure</strong>, a 3-tuple with the <var>Parameter</var>s, the <var>Block</var> and the current environment. This closure is bound to <var>Identifier</var> in the current environment. The result of a <code>define</code> statement is <em>undefined</em>.</p>
+
+      <h3 id="return-statement"><code>return</code> statement</h3>
+
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Grammar</h5>
+          <p><code>return</code> <var>Expression</var> <code>;</code></p>
+        </div>
+      </div>
+
+      <p>At runtime, a <code>return</code> statement in a function evaluates <var>Expression</var>, then immediately hands over execution to the function's caller, without executing any more statements in the function, returning the result of the evaluation as the result of the entire function call. <mark>A <code>return</code> statement outside of any function similarly aborts the entire program, letting the result of the evaluation be the result of the entire program.</mark> A <code>return</code> statement has no result.</p>
+
+      <h3 id="expression-statement">Expression statement</h3>
+
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Grammar</h5>
+          <p><var>Expression</var> <code>;</code></p>
+        </div>
+      </div>
+
+      <p>At runtime, an expression statement <var>Expression</var>. The result of the statement is the result of the evaluation.</p>
     </div>
   </body>
 </html>
