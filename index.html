@@ -41,9 +41,9 @@
 
       <p><strong>Strings</strong> are enclosed in double quotes (<code>"</code>); within them, any Unicode character may appear except for a double quote. The backslash character (<code>\</code>) is not treated specially (in particular, it doesn't impose a different interpretation of the next character); it only represents itself literally.</p>
 
-      <p>Whitespace is allowed (and ignored) between tokens, but never allowed within them. The recognized whitespace characters are space (0x20), line feed (0x0A), carriage return (0x0D), and horizontal tab (0x09). Other forms of (ASCII or Unicode) whitespace are not allowed between tokens.</p>
+      <p>Whitespace is allowed (and ignored) between tokens. The recognized whitespace characters are space (0x20), line feed (0x0A), carriage return (0x0D), and horizontal tab (0x09). Other forms of (ASCII or Unicode) whitespace are not allowed between tokens. Strings can contain whitespace (or any character except for `"`); other token types, by construction, cannot.</p>
 
-      <p>Any non-whitespace sequence of characters which doesn't match any of the above token categories is <strong>disallowed</strong>, and causes a tokenization error to be issued; in this case, the program is not processed further.</p>
+      <p>Any character which doesn't match any of the above token categories, or whitespace, is <strong>disallowed</strong>, and causes a tokenization error to be issued; in this case, the program is not processed further.</p>
 
       <h2 id="structure">Program structure</h2>
 
